@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
-import { toast } from 'react-hot-toast/headless'
+import toast,{Toaster} from 'react-hot-toast';
 
 export default function LoginPage() {
     const router = useRouter()
@@ -65,6 +65,7 @@ export default function LoginPage() {
                 </div>
                 <p>You not have Account <Link href={'/signup'} className='text-blue-700'>Signup</Link></p>
             </div>
+            <Toaster/>
         </div>
     )
 }

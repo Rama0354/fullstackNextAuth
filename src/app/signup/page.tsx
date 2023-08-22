@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
-import { toast } from 'react-hot-toast'
+import toast,{Toaster} from 'react-hot-toast';
 
 export default function SignUpPage() {
     const router = useRouter()
@@ -36,6 +36,7 @@ export default function SignUpPage() {
         }
     }
     return (
+        <>
         <div className='flex flex-col justify-center items-center min-h-screen py-2 gap-3'>
             <div className="relative w-96 p-2 border border-blue-200 rounded-lg">
                 <div className="p-2 border-b border-blue-600 mb-3 flex gap-3">
@@ -70,5 +71,7 @@ export default function SignUpPage() {
                 </div>
             </div>
         </div>
+        <Toaster/>
+        </>
     )
 }
