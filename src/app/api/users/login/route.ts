@@ -15,7 +15,7 @@ export async function POST(request:NextRequest){
         // check if user exists
         const user = await User.findOne({email})
         if(!user){
-            return NextResponse.json({error:"USer does not exists!"},{status:400})
+            return NextResponse.json({error:"User does not exists!"},{status:400})
         }
 
         // check if password is correct
