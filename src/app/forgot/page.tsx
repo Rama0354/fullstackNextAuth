@@ -5,42 +5,39 @@ import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import toast,{Toaster} from 'react-hot-toast';
 
-export default function SignUpPage() {
+export default function ForgotPassword() {
     const router = useRouter()
     const [btnDisabled,setBtnDisabled] = useState(false)
     const [isLoading,setIsLoading] = useState(false)
     const [user,setUser] = useState({
-        username:'',
         email:'',
-        password:'',
     })
+
     useEffect(()=>{
-        if(user.username.length > 0 && user.email.length > 0 && user.password.length > 0){
+        if(user.email.length > 0){
             setBtnDisabled(false)
         }else{
             setBtnDisabled(true)
         }
     },[user])
-
-    const onSignup = async ()=>{
+    const onForgot = async ()=>{
         try {
             setIsLoading(true)
-            const res = await axios.post('/api/users/signup',user)
-            console.log("Signup Success",res.data )
-            router.push('/login')
+            const res = await axios.post('/api/users/forgot',user)
+            console.log('Send Email Success!',res.data)
+            toast.success("Please check your email")
         } catch (error:any) {
-            console.log("Signup Failed",error.message)
-            toast.error(error.message)
+            console.log("Send Email Failed!", error.message)
+            toast.error(error.response.data.error)
         }finally{
             setIsLoading(false)
         }
     }
     return (
-        <>
         <div className='flex flex-col justify-center items-center min-h-screen py-2 gap-3'>
-            <div className="relative w-96 p-2 border border-white bg-slate-200/10 rounded-md shadow-md">
+            <div className="relative w-96 p-2 border border-white bg-gray-300/20 rounded-md shadow-md">
                 <div className="p-2 border-b border-white mb-3 flex gap-3">
-                    <h1 className='font-bold text-3xl text-white'>Signup</h1>
+                    <h1 className='font-bold text-3xl text-white'>Forgot Password</h1>
                     {isLoading ? (
                         <div role="status">
                             <svg aria-hidden="true" className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,24 +51,15 @@ export default function SignUpPage() {
                     )}
                 </div>
                 <div className="flex flex-col">
-                    <label className='font-medium' htmlFor="username">Username</label>
-                    <input className='p-2 border-transparent border-2 focus:border-blue-400 outline-none focus:outline-none rounded-md text-gray-700' type="text" name='username' value={user.username} onChange={(e)=>setUser({...user,username:e.target.value})} placeholder='admin' autoComplete='off' />
-                </div>
-                <div className="flex flex-col">
                     <label className='font-medium' htmlFor="email">E-Mail</label>
                     <input className='p-2 border-transparent border-2 focus:border-blue-400 outline-none focus:outline-none rounded-md text-gray-700' type="email" name='email' value={user.email} onChange={(e)=>setUser({...user,email:e.target.value})} placeholder='admin@mail.com' autoComplete='off' />
                 </div>
-                <div className="flex flex-col">
-                    <label className='font-medium' htmlFor="password">Password</label>
-                    <input className='p-2 border-transparent border-2 focus:border-blue-400 outline-none focus:outline-none rounded-md text-gray-700' type="password" name='password' value={user.password} onChange={(e)=>setUser({...user,password:e.target.value})} placeholder='*********' />
-                </div>
                 <div className="flex justify-between gap-2 py-2 mt-3">
-                    <button onClick={onSignup} disabled={btnDisabled} className=' w-2/3 p-2 bg-blue-600 hover:bg-blue-800 disabled:bg-gray-600 disabled:text-gray-200 font-medium hover:font-bold text-white text-lg rounded-md'>Signup</button>
-                    <Link href={'/login'} className=' w-1/3 p-2 flex justify-center bg-white hover:bg-gray-200 font-medium hover:font-bold text-blue-600 text-lg rounded-md'>Cancel</Link>
+                    <button onClick={onForgot} disabled={btnDisabled} className='w-full p-2 bg-blue-600 hover:bg-blue-800 disabled:bg-gray-600 disabled:text-gray-200 font-medium hover:font-bold text-white text-lg rounded-md'>Send Email</button>
                 </div>
+                <p>Back to <Link href={'/login'} className='text-blue-500 hover:text-blue-600 hover:underline'>Login</Link></p>
             </div>
+            <Toaster/>
         </div>
-        <Toaster/>
-        </>
     )
 }

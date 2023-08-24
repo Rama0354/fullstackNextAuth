@@ -25,3 +25,10 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+.circle-container{
+  @apply flex justify-center items-center min-h-screen relative overflow-hidden
+}
+.circle{
+  @apply -z-50 w-[450px] h-[450px] rounded-full bg-gradient-to-b from-[#fa39ad]/50 to-[#fe6c4c]/50 absolute animate-ambient blur-3xl
+  before:content-[''] before:absolute before:translate-x-16 before:translate-y-16 before:w-full before:blur-3xl before:h-full before:rounded-full before:bg-gradient-to-b before:from-[#CD81FF]/50 before:to-[#49E5A4]/50
+}

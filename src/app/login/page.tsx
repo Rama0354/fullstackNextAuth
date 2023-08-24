@@ -37,9 +37,9 @@ export default function LoginPage() {
     }
     return (
         <div className='flex flex-col justify-center items-center min-h-screen py-2 gap-3'>
-            <div className="relative w-96 p-2 border border-blue-200 rounded-lg">
-                <div className="p-2 border-b border-blue-600 mb-3 flex gap-3">
-                    <h1 className='font-bold text-3xl text-blue-600'>Login</h1>
+            <div className="relative w-96 p-2 border border-white bg-gray-300/20 rounded-md shadow-md">
+                <div className="p-2 border-b border-white mb-3 flex gap-3">
+                    <h1 className='font-bold text-3xl text-white'>Login</h1>
                     {isLoading ? (
                         <div role="status">
                             <svg aria-hidden="true" className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,17 +53,17 @@ export default function LoginPage() {
                     )}
                 </div>
                 <div className="flex flex-col">
-                    <label htmlFor="email">E-Mail</label>
-                    <input className='p-2 border-gray-300 border-2 focus:border-blue-400 outline-none focus:outline-none rounded-md text-gray-700' type="email" name='email' value={user.email} onChange={(e)=>setUser({...user,email:e.target.value})} placeholder='admin@mail.com' autoComplete='off' />
+                    <label className='font-medium' htmlFor="email">E-Mail</label>
+                    <input className='p-2 border-transparent border-2 focus:border-blue-400 outline-none focus:outline-none rounded-md text-gray-700' type="email" name='email' value={user.email} onChange={(e)=>setUser({...user,email:e.target.value})} placeholder='admin@mail.com' autoComplete='off' />
                 </div>
                 <div className="flex flex-col">
-                    <label htmlFor="password">Password</label>
-                    <input className='p-2 border-gray-300 border-2 focus:border-blue-400 outline-none focus:outline-none rounded-md text-gray-700' type="password" name='password' value={user.password} onChange={(e)=>setUser({...user,password:e.target.value})} placeholder='*********' />
+                    <label className='font-medium' htmlFor="password">Password</label>
+                    <input className='p-2 border-transparent border-2 focus:border-blue-400 outline-none focus:outline-none rounded-md text-gray-700' type="password" name='password' value={user.password} onChange={(e)=>setUser({...user,password:e.target.value})} placeholder='*********' />
                 </div>
                 <div className="flex justify-between gap-2 py-2 mt-3">
                     <button onClick={onLogin} disabled={btnDisabled} className='w-full p-2 bg-blue-600 hover:bg-blue-800 disabled:bg-gray-600 disabled:text-gray-200 font-medium hover:font-bold text-white text-lg rounded-md'>Login</button>
                 </div>
-                <p>You not have Account <Link href={'/signup'} className='text-blue-700'>Signup</Link></p>
+                <p className='font-medium text-center'>You not have Account?<br/><Link href={'/signup'} className='text-blue-500 hover:text-blue-600 hover:underline'>Signup</Link> or <Link href={'/forgot'} className='text-blue-500 hover:text-blue-600 hover:underline'>Forgot Password?</Link></p>
             </div>
             <Toaster/>
         </div>

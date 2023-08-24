@@ -29,7 +29,7 @@ export const sendEmail = async({email,emailType,userId}:any)=>{
             from:'ramadhansaputra354@gmail.com',
             to: email,
             subject: emailType === 'VERIFY' ? 'Verify your E-Mail':'Reset Your Password',
-            html:`<p>Click <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}">Here</a> to ${emailType === 'VERIFY' ? 'Verify your E-Mail' : 'Reset your password'} or copy and paste the link  below in your browser. <br/> ${process.env.DOMAIN}/verifyemail?token=${hashedToken}</p>`
+            html:`<p>Click <a href="${process.env.DOMAIN}/${emailType === 'VERIFY' ? 'verifyemail':'resetpassword'}?token=${hashedToken}">Here</a> to ${emailType === 'VERIFY' ? 'Verify your E-Mail' : 'Reset your password'} or copy and paste the link  below in your browser. <br/> ${process.env.DOMAIN}/${emailType === 'VERIFY' ? 'verifyemail':'resetpassword'}?token=${hashedToken}</p>`
         }
         const mailResponse = await transport.sendMail(mailOptions)
         return mailResponse
