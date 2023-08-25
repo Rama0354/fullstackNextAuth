@@ -20,8 +20,8 @@ export default function RootLayout({
       <body className={poppins.className}>
         <div className="circle-container">
           <div className="circle"></div>
-          {children}
         </div>
+          {children}
       </body>
     </html>
   )
